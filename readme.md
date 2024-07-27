@@ -10,6 +10,8 @@
 
 - [Instalação e execução](#instalação-e-execução-do-projeto)
 
+- [Banco de dados](#banco-de-dados)
+
 - [Tabelas](#tabelas-de-dados)
 
 - [Melhorias possíveis](#melhorias-possíveis)
@@ -68,6 +70,13 @@ Configurar com as suas informações críticas de ambiente
 cd src
 node index.js
 ```
+
+## Banco de dados
+
+Interface utilizada: PgAdmin.
+
+Passo a passo:
+1. Criação de Repositório DataBase chamado "+Hoje".
 
 
 ## Tabelas de dados
