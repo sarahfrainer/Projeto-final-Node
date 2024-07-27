@@ -85,14 +85,14 @@ Passo a passo:
 
 | Coluna    | Tipo       | Restrição                 |
 |-----------|------------|---------------------------|
-| id        | INTEGER     |Auto-increment, Primary Key|
+| id        | INTEGER    |Auto-increment, Primary Key|
 | name      | STRING     | Não nulo                  |
-| gender    | STRING     | Não nulo                  |
+| gender    | ENUM       | Não nulo                  |
 | cpf       | STRING     | Não nulo, Único           |
 | address   | STRING     | Não nulo                  |
+| birthdate | DATE       | Não nulo                  |
 | email     | STRING     | Não nulo, Único           |
 | password  | STRING     | Não nulo                  |
-| birthdate | DATE       | Não nulo                  |
 
 
 ### Tabela de Locais de Treino
