@@ -81,6 +81,38 @@ Passo a passo:
 
 ## Tabelas de dados
 
+### Tabela de Usuários
+
+| Coluna    | Tipo       | Restrição                 |
+|-----------|------------|---------------------------|
+| id        | INTEGER     |Auto-increment, Primary Key|
+| name      | STRING     | Não nulo                  |
+| gender    | STRING     | Não nulo                  |
+| cpf       | STRING     | Não nulo, Único           |
+| address   | STRING     | Não nulo                  |
+| email     | STRING     | Não nulo, Único           |
+| password  | STRING     | Não nulo                  |
+| birthdate | DATE       | Não nulo                  |
+
+
+### Tabela de Locais de Treino
+
+| Coluna         | Tipo              | Restrição                                         |
+|----------------|-------------------|---------------------------------------------------|
+| id             | INTEGER           | Auto-increment, Primary Key                       |
+| name           | STRING            | Não nulo                                          |
+| description    | TEXT              | Não nulo                                          |
+| locality       | STRING            | Não nulo                                          |
+| coordinates    | STRING            | Não nulo                                          |
+| googleMapsLink | STRING            | Não nulo, Formato de URL válido                   |
+| userId         | INTEGER           | Não nulo, Referência à tabela de usuários         |
+
+
+### Relacionamentos
+
+- Um usuário pode ter vários locais de treino associados.
+- Um local de treino pertence a um único usuário.
+
 
 ## Melhorias possíveis
 
