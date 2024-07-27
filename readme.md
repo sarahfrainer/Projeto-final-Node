@@ -103,8 +103,8 @@ Passo a passo:
 | name           | STRING            | Não nulo                                          |
 | description    | TEXT              | Não nulo                                          |
 | locality       | STRING            | Não nulo                                          |
-| coordinates    | STRING            | Não nulo                                          |
-| googleMapsLink | STRING            | Não nulo, Formato de URL válido                   |
+| coordinates    | ARRAY('FLOAT')    | Não nulo                                          |
+| CEP            | STRING            | Não nulo                                          |
 | userId         | INTEGER           | Não nulo, Referência à tabela de usuários         |
 
 
@@ -112,6 +112,10 @@ Passo a passo:
 
 - Um usuário pode ter vários locais de treino associados.
 - Um local de treino pertence a um único usuário.
+
+### Rodando os arquivos das migrations
+
+- npx sequelize db:migrate.
 
 
 ## Melhorias possíveis
