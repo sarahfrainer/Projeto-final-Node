@@ -14,7 +14,7 @@ function validateJWT(request, response, next) {
     
         const resultado = verify(jwt[1], process.env.JWT_SECRET)
         
-        request.user_id = resultado.id
+        request.userId = resultado.id
 
         next()
     } catch (error) {
