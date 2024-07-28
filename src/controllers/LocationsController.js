@@ -41,16 +41,7 @@ class LocationsController {
                     .status(400)
                     .json({ mensagem: 'As coordenadas são obrigatórias' });
             }
-            const user = await User.create({
-                id: novoLivro.id,
-                name: data.name,
-                gender: data.gender,
-                cpf: data.cpf,
-                adress: data.adress,
-                birthdate: data.birthdate,
-                email: data.email,
-                password_hash: data.password
-            })
+            
             const coordinatesExists = await TrainingLocations.findOne({
                 where: {
                     coordinates: data.coordinates
@@ -92,7 +83,32 @@ class LocationsController {
             response.status(500).json({ mensagem: 'Erro ao cadastrar o local' });
         }}
 
+        async listAll (request, response) {
+            try {
+                const { usuario_id } = request.query
     
+                const locations = await TrainingLocations.findAll({
+                    where: usuario_id ? { usuario_id: usuario_id } : {},
+                    attributes: [
+                        ['name', 'nome'],
+                        'usuario_id'
+                    ],
+                    order: [['name', 'DESC']]
+                })
+    
+                if(locations.length === 0) {
+                    response.status(404).json({ mensagem: 'Não foi encontrado nenhum curso' })
+                }
+    
+                response.json(locations)
+            } catch (error) {
+                response.status(500).json({
+                    mensagem: 'Houve um erro ao listar os locais'
+                })
+            }
+        }
+    
+        
 }
 
 module.exports = new LocationsController();
