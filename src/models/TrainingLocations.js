@@ -3,6 +3,11 @@ const connection = require('../database/connection');
 const Usuario = require('./User');
 
 const TrainingLocations = connection.define('training_locations', {
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
     name: {
         type: DataTypes.STRING,
         allowNull: false
@@ -17,13 +22,14 @@ const TrainingLocations = connection.define('training_locations', {
     },
     coordinates: {
         type: DataTypes.ARRAY(DataTypes.FLOAT),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     cep: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    usuarioId: {
+    usuario_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

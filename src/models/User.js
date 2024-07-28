@@ -4,6 +4,11 @@ const {hashSync} = require('bcryptjs');
 const TrainingLocations = require("./TrainingLocations");
 
 const User = connection.define('users', {
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
     nome: {
         type: DataTypes.STRING,
         allowNull: false
@@ -35,7 +40,10 @@ const User = connection.define('users', {
         allowNull: false,
         field: 'password' 
     }
-})
+},
+{
+    paranoid: true // Habilita soft delete
+});
 
 
 Usuario.hasMany(TrainingLocations, {
