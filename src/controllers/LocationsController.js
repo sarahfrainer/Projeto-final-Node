@@ -107,8 +107,33 @@ class LocationsController {
                 })
             }
         }
-    
+
+            async listOne(request, response) {
+                try {
+                    const { id } = request.params;
+                    const local = await TrainingLocations.findByPk(id, {
+                        attributes: [
+                            ['id', 'identificador'],
+                            ['name', 'nome'],
+                            ['description', 'descrição'],
+                            ['coordinates', 'coordenadas'],
+                            ['cep', 'cep'],
+                            'usuario_id'
+                        ]
+                    });
         
+                    if (!local) {
+                        return response.status(404).json({ message: 'Local não encontrado' });
+                    }
+        
+                    return response.status(200).json(local);
+                } catch (error) {
+                    console.log(error);
+                    return response.status(500).json({ message: 'Erro ao buscar o local' });
+                }
+            }
+    
+     
 }
 
 module.exports = new LocationsController();
