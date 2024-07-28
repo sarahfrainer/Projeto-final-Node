@@ -16,7 +16,7 @@ Criar as rotas para excluir e alterar informações de um local específico cada
 Implementar validações e garantir que apenas o usuário que cadastrou o local possa realizar essas operações.
 */
 
-const TrainingLocations = require('../models/TrainingLocations')
+const TrainingLocations = require('../models/TrainingLocations');
 
 class LocationsController {
 
@@ -25,47 +25,31 @@ class LocationsController {
             const data = request.body;
 
             if (!data.name) {
-                return response
-                    .status(400)
-                    .json({ mensagem: 'O nome é obrigatório' });
+                return response.status(400).json({ mensagem: 'O nome é obrigatório' });
             }
 
             if (!data.description) {
-                return response
-                    .status(400)
-                    .json({ mensagem: 'A descrição é obrigatória' });
+                return response.status(400).json({ mensagem: 'A descrição é obrigatória' });
             }
 
             if (!data.coordinates) {
-                return response
-                    .status(400)
-                    .json({ mensagem: 'As coordenadas são obrigatórias' });
+                return response.status(400).json({ mensagem: 'As coordenadas são obrigatórias' });
             }
-            
+
             const coordinatesExists = await TrainingLocations.findOne({
-                where: {
-                    coordinates: data.coordinates
-                }
+                where: { coordinates: data.coordinates }
             });
 
             if (coordinatesExists) {
-                return response
-                    .status(409)
-                    .json({ mensagem: 'Um local já foi criado nessas coordenadas' });
+                return response.status(409).json({ mensagem: 'Um local já foi criado nessas coordenadas' });
             }
 
             if (!data.cep) {
-                return response
-                    .status(400)
-                    .json({ mensagem: 'O CEP é obrigatório' });
+                return response.status(400).json({ mensagem: 'O CEP é obrigatório' });
             }
 
-            //voltar para pegar o id do usuário automaticamente quando aplicar o JWT
-
-            if (!data.usuario_id) {
-                return response
-                    .status(400)
-                    .json({ mensagem: 'O ID de usuário é obrigatório' });
+            if (!data.user_id) {
+                return response.status(400).json({ mensagem: 'O ID de usuário é obrigatório' });
             }
 
             const newLocation = await TrainingLocations.create(data);
@@ -75,72 +59,149 @@ class LocationsController {
                 description: newLocation.description,
                 coordinates: newLocation.coordinates,
                 cep: newLocation.cep,
-                usuario_id: newLocation.usuario_id
+                user_id: newLocation.user_id
             });
 
         } catch (error) {
             console.log(error);
             response.status(500).json({ mensagem: 'Erro ao cadastrar o local' });
-        }}
-
-        async listAll (request, response) {
-            try {
-                const { usuario_id } = request.query
-    
-                const locations = await TrainingLocations.findAll({
-                    where: usuario_id ? { usuario_id: usuario_id } : {},
-                    attributes: [
-                        ['name', 'nome'],
-                        'usuario_id'
-                    ],
-                    order: [['name', 'DESC']]
-                })
-    
-                if(locations.length === 0) {
-                    response.status(404).json({ mensagem: 'Não foi encontrado nenhum curso' })
-                }
-    
-                response.json(locations)
-            } catch (error) {
-                response.status(500).json({
-                    mensagem: 'Houve um erro ao listar os locais'
-                })
-            }
         }
+    }
 
-        async listOne(request, response) {
-            try {
-                const { id } = request.params;
-                const usuario_id = request.userId;
-    
-                const local = await TrainingLocations.findOne({
-                    where: {
-                        id: id,
-                        usuario_id: usuario_id
-                    },
-                    attributes: [
-                        ['id', 'identificador'],
-                        ['name', 'nome'],
-                        ['description', 'descrição'],
-                        ['coordinates', 'coordenadas'],
-                        ['cep', 'cep'],
-                        'usuario_id'
-                    ]
-                });
-    
-                if (!local) {
-                    return response.status(404).json({ message: 'Local não encontrado' });
-                }
-    
-                return response.status(200).json(local);
-            } catch (error) {
-                console.log(error);
-                return response.status(500).json({ message: 'Erro ao buscar o local' });
+    async listAll(request, response) {
+        try {
+            const { user_id } = request.query;
+
+            const locations = await TrainingLocations.findAll({
+                where: user_id ? { user_id: user_id } : {},
+                attributes: [
+                    ['name', 'nome'],
+                    'user_id'
+                ],
+                order: [['name', 'DESC']]
+            });
+
+            if (locations.length === 0) {
+                return response.status(404).json({ mensagem: 'Não foi encontrado nenhum local' });
             }
-        }
-    
 
-     
+            return response.json(locations);
+        } catch (error) {
+            console.log(error);
+            response.status(500).json({ mensagem: 'Houve um erro ao listar os locais' });
+        }
+    }
+
+    async listOne(request, response) {
+        try {
+            const { id } = request.params;
+            const user_id = request.userId;
+
+            const location = await TrainingLocations.findOne({
+                where: {
+                    id: id,
+                    user_id: user_id
+                },
+                attributes: [
+                    ['id', 'identificador'],
+                    ['name', 'nome'],
+                    ['description', 'descrição'],
+                    ['coordinates', 'coordenadas'],
+                    ['cep', 'cep'],
+                    'user_id'
+                ]
+            });
+
+            if (!location) {
+                return response.status(404).json({ message: 'Local não encontrado' });
+            }
+
+            return response.status(200).json(location);
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ message: 'Erro ao buscar o local' });
+        }
+    }
+
+    async delete(request, response) {
+        try {
+            const { id } = request.params;
+            const user_id = request.userId;
+
+            const location = await TrainingLocations.findOne({
+                where: {
+                    id: id,
+                    user_id: user_id
+                }
+            });
+
+            if (!location) {
+                return response.status(404).json({ message: 'Local não encontrado' });
+            }
+
+            await TrainingLocations.destroy({ where: { id } });
+            return response.status(200).json({ message: `Local com id ${id} excluído com sucesso!` });
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ message: 'Erro ao excluir o local' });
+        }
+    }
+
+    async update(request, response) {
+        try {
+            const { id } = request.params;
+            const user_id = request.userId;
+            const data = request.body;
+
+            if (!data.name) {
+                return response.status(400).json({ mensagem: 'O nome é obrigatório' });
+            }
+
+            if (!data.description) {
+                return response.status(400).json({ mensagem: 'A descrição é obrigatória' });
+            }
+
+            if (!data.coordinates) {
+                return response.status(400).json({ mensagem: 'As coordenadas são obrigatórias' });
+            }
+
+            const coordinatesExists = await TrainingLocations.findOne({
+                where: { coordinates: data.coordinates }
+            });
+
+            if (coordinatesExists) {
+                return response.status(409).json({ mensagem: 'Um local já foi criado nessas coordenadas' });
+            }
+
+            if (!data.cep) {
+                return response.status(400).json({ mensagem: 'O CEP é obrigatório' });
+            }
+
+            const location = await TrainingLocations.findOne({
+                where: {
+                    id: id,
+                    user_id: user_id
+                }
+            });
+
+            if (!location) {
+                return response.status(404).json({ message: 'Local não encontrado' });
+            }
+
+            location.name = data.name || location.name;
+            location.description = data.description || location.description;
+            location.coordinates = data.coordinates || location.coordinates;
+            location.cep = data.cep || location.cep;
+
+            await location.save();
+
+            return response.status(200).json(location);
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ message: 'Erro ao atualizar o local' });
+        }
+    }
 }
 
 module.exports = new LocationsController();
+
