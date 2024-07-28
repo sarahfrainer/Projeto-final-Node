@@ -3,7 +3,7 @@ const connection = require("../database/connection");
 const {hashSync} = require('bcryptjs');
 const TrainingLocations = require("./TrainingLocations");
 
-const Usuario = connection.define('users', {
+const User = connection.define('users', {
     nome: {
         type: DataTypes.STRING,
         allowNull: false
@@ -37,16 +37,16 @@ const Usuario = connection.define('users', {
     }
 })
 
-// hooks
+
 Usuario.hasMany(TrainingLocations, {
     foreignKey: 'usuarioId',
     onDelete: 'RESTRICT' // Impede a exclusão
 });
 
 
-Usuario.beforeSave((usuario) => {
-    usuario.password_hash = hashSync(usuario.password_hash, 10)
-    return usuario
+User.beforeSave((user) => {
+    user.password_hash = hashSync(user.password_hash, 10)
+    return user
 })
 
-module.exports = Usuario
+module.exports = User
