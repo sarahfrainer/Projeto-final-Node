@@ -29,7 +29,7 @@ const TrainingLocations = connection.define('training_locations', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    usuario_id: {
+    user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

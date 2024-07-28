@@ -35,14 +35,13 @@ const User = connection.define('users', {
         allowNull: false,
         unique: true
     },
-    password_hash: {
+    password: {
         type: DataTypes.STRING,
         allowNull: false,
-        field: 'password' 
     }
 },
 {
-    paranoid: true // Habilita soft delete
+    paranoid: true
 });
 
 
@@ -53,7 +52,7 @@ Usuario.hasMany(TrainingLocations, {
 
 
 User.beforeSave((user) => {
-    user.password_hash = hashSync(user.password_hash, 10)
+    user.password = hashSync(user, 10)
     return user
 })
 
