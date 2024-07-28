@@ -47,12 +47,12 @@ const User = connection.define('users', {
 
 Usuario.hasMany(TrainingLocations, {
     foreignKey: 'usuarioId',
-    onDelete: 'RESTRICT' // Impede a exclusão
+    onDelete: 'RESTRICT' // Barra a exclusão
 });
 
 
 User.beforeSave((user) => {
-    user.password = hashSync(user, 10)
+    user.password = hashSync(user.password, 10)
     return user
 })
 

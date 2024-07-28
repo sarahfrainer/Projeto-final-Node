@@ -11,7 +11,7 @@ Garantir que apenas o usuário autenticado tenha acesso a essas informações.
 Desenvolver as rotas para listar informações detalhadas de um local específico cadastrado pelo usuário: GET (/local/:local_id).
 Garantir que apenas o usuário que cadastrou o local tenha acesso a essas informações.
 
-10 - Implementação das Rotas para Excluir e Alterar Informações de um Local Específico do Usuário
+10 - Implementação das Rotas para Excluir e Alterar Informações de um Local Específico do Usuário 
 Criar as rotas para excluir e alterar informações de um local específico cadastrado pelo usuário. DELETE(/local/:local_id), PUT(/local/:local_id)
 Implementar validações e garantir que apenas o usuário que cadastrou o local possa realizar essas operações.
 */

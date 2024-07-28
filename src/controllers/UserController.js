@@ -57,7 +57,7 @@ class UserController {
                     .json({ mensagem: 'Conta não encontrada' })
             }
 
-            const passwordOk = compareSync(data.password, user.password_hash)
+            const passwordOk = compareSync(data.password, user.password)
 
             if (!passwordOk) {
                 return response
@@ -116,6 +116,18 @@ class UserController {
                     .json({ mensagem: 'Por favor, insira um cpf válido' })
             }
 
+            const cpfExist = await User.findOne({
+                where: {
+                    cpf: data.cpf
+                }
+            })
+
+            if (cpfExist) {
+                return response
+                    .status(409)
+                    .json({ mensagem: 'Uma conta já foi criada nesse CPF' })
+            }
+
             if (!data.adress) {
                 return response
                     .status(400)
@@ -164,26 +176,17 @@ class UserController {
                     .json({ mensagem: 'Uma conta já foi criada nesse e-mail' })
             }
 
-            const cpfExist = await User.findOne({
-                where: {
-                    cpf: data.cpf
-                }
-            })
-
-            if (cpfExist) {
-                return response
-                    .status(409)
-                    .json({ mensagem: 'Uma conta já foi criada nesse CPF' })
-            }
+           
 
             const user = await User.create({
+                id: data.id,
                 name: data.name,
                 gender: data.gender,
                 cpf: data.cpf,
                 adress: data.adress,
                 birthdate: data.birthdate,
                 email: data.email,
-                password_hash: data.password
+                password: data.password
             })
 
             response.status(201).json({
