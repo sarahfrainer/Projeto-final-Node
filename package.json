@@ -1,4 +1,21 @@
 {
+  "name": "projeto-final-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:prod": "node src/index.js",
+    "start:dev": "nodemon src/index.js",
+    "swagger": "node ./autoGen.swagger.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.3",
+    "sequelize-cli": "^6.6.2"
+  },
+
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -8,9 +25,8 @@
     "nodemon": "^3.1.4",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.37.3"
-  },
-  "devDependencies": {
-    "sequelize-cli": "^6.6.2"
+    "sequelize": "^6.37.3",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1"
   }
 }
