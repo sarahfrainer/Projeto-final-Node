@@ -2,7 +2,7 @@
   "name": "projeto-final-node",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start:prod": "node src/index.js",
     "start:dev": "nodemon src/index.js",

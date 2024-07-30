@@ -59,6 +59,7 @@ O sistema conta com sistema de autenticação e rotas privadas, sendo que este �
 git clone https://github.com/sarahfrainer/Projeto-final-Node.git
 npm install nodemon
 npm install express sequelize pg pg-hstore dotenv bcryptjs cors jsonwebtoken
+npm install swagger-ui-express
 
 ```
 
