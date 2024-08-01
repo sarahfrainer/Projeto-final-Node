@@ -1,4 +1,5 @@
 const TrainingLocations = require('../models/TrainingLocations');
+const { getGoogleMapsLinkFromCep } = require('../services/map.service');
 
 class LocationsController {
 
@@ -161,6 +162,37 @@ class LocationsController {
             return response.status(500).json({ message: 'Erro ao atualizar o local' });
         }
     }
+
+    async Map (request, response) {
+        try {
+            const user_id = request.userId;
+            const { id } = request.params; // Recebe o ID do local na requisição
+
+            // Busca o local pelo ID e verifica se pertence ao usuário
+            const location = await TrainingLocations.findOne({
+                where: {
+                    id: id,
+                    user_id: user_id
+                },
+                attributes: ['id', 'name', 'description', 'cep', 'user_id']
+            });
+
+            if (!location) {
+                return response.status(404).json({ mensagem: 'Cep não encontrado' });
+            }
+
+            const mapLink = await MainLink(location.cep);
+
+            return response.json({
+                name: location.name,
+                googleMapsLink: mapLink
+            });
+        } catch (error) {
+            console.log(error);
+            response.status(500).json({ mensagem: 'Houve um erro ao requisitar o link do Google Maps' });
+        }
+    }
+
 }
 
 module.exports = new LocationsController();

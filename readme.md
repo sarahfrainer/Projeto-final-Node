@@ -60,6 +60,7 @@ git clone https://github.com/sarahfrainer/Projeto-final-Node.git
 npm install nodemon
 npm install express sequelize pg pg-hstore dotenv bcryptjs cors jsonwebtoken
 npm install swagger-ui-express
+npm install axios
 
 ```
 
@@ -107,8 +108,7 @@ Passo a passo:
 | name           | STRING            | Não nulo                                          |
 | description    | TEXT              | Não nulo                                          |
 | locality       | STRING            | Não nulo                                          |
-| coordinates    | ARRAY('FLOAT')    | Não nulo                                          |
-| CEP            | STRING            | Não nulo                                          |
+| cep            | STRING            | Não nulo                                          |
 | userId         | INTEGER           | Não nulo, Referência à tabela de usuários         |
 
 

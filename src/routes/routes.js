@@ -10,6 +10,8 @@ const routes = new Router()
 
 routes.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
+
+
 routes.use('/users', usersRoutes)
 routes.use('/locations', validateJWT, LocationsRoutes)
 

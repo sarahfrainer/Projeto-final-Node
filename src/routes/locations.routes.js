@@ -81,6 +81,39 @@ locationsRoutes.get('/:id', LocationsController.listOne
 */
 
 )
+
+locationsRoutes.get('/:id/maps', LocationsController.Map
+
+    /* 
+        swagger.tags = ['TrainingLocations']
+        #swagger.description = 'Solicitar o link do local no Google Maps',
+        #swagger.security = [{
+            bearerAuth: []
+        }]
+        #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'ID do local de treino',
+            required: true,
+            type: 'integer',
+            example: 1
+        },
+        #swagger.responses[200] = {
+        description: 'Link do Google Maps do local solicitado',
+        schema: {
+            type: 'object',
+            properties: {
+                name: { type: 'string', example: 'Academia +' },
+                googleMapsLink: { 
+                    type: 'string',
+                    example: 'https://www.google.com/maps?q=-23.5505,-46.6333'
+                }
+            }
+        }
+    },
+    */
+    
+    )
+
 locationsRoutes.delete('/:id', LocationsController.delete
     /* 
     swagger.tags = ['TrainingLocations']
