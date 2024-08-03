@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const connection = require('../database/connection');
-const User = require('./User'); // Ajuste de nome do modelo para User
+const User = require('./User');
 
 const TrainingLocations = connection.define('training_locations', {
     id: {
@@ -28,17 +28,12 @@ const TrainingLocations = connection.define('training_locations', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'users',
+            model: 'User',
             key: 'id'
         }
     }
 }, {
     paranoid: true // Habilita soft delete
-});
-
-// Estabelece relação entre as tabelas
-TrainingLocations.belongsTo(User, {
-    foreignKey: 'user_id'
 });
 
 module.exports = TrainingLocations;

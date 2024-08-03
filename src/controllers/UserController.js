@@ -42,7 +42,7 @@ class UserController {
             if (!data.email || !data.password) {
                 return response
                     .status(400)
-                    .json({ mensagem: 'Nome e senha são obrigatórios' })
+                    .json({ mensagem: 'Email e senha são obrigatórios' })
             }
 
             const user = await User.findOne({

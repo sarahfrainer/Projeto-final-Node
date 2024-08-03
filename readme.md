@@ -144,9 +144,9 @@ npx sequelize-cli seed:generate --name nome-do-arquivo
 No projeto, foi utilizado o JWT como Middleware para uma segurança extra. Dessa forma, nas rotas privadas (rotas que envolvem os locais), é preciso utilizar o token para fazer as requisições. No Postman, o passo a passo para isso é:
 
 
-1. Realize o cadastro de um usuário utilizando a rota criada para este fim (Modo POST + endpoint "/users/register" + informações requisitadas no body);
+1. Realize o cadastro de um usuário utilizando a rota criada para este fim (Modo POST + endpoint "http://localhost:3000/users/register" + informações requisitadas no body);
 2. Realize login com esse usuário. Como resposta, aparecerá o token. Copie-o.
-3. Selecione a rota de local desejada. No header da requisição, selecione "bearer token" e cole o código JWT. Finalize a requisição com os outros procedimentos que forem necessários (por exemplo, preenchendo o body no caso do cadastro de um local).
+3. Selecione a rota de local desejada. No "Authorization" da requisição, selecione "bearer token" e cole o código JWT. Finalize a requisição com os outros procedimentos que forem necessários (por exemplo, preenchendo o body no caso do cadastro de um local).
 
 
 
