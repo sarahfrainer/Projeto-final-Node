@@ -4,7 +4,7 @@ const {hashSync} = require('bcryptjs');
 const TrainingLocations = require("./TrainingLocations");
 
 const User = connection.define('users', {
-    id:{
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -37,17 +37,15 @@ const User = connection.define('users', {
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     }
-},
-{
+}, {
     paranoid: true
 });
 
 // Estabelece relação entre as tabelas
-
-Usuario.hasMany(TrainingLocations, {
-    foreignKey: 'usuarioId',
+User.hasMany(TrainingLocations, {
+    foreignKey: 'user_id',
     onDelete: 'RESTRICT' // Impede a exclusão do usuário que tiver um local de treino ou mais cadastrados
 });
 

@@ -1,8 +1,3 @@
-/* Implementação das Rotas de Usuário
-Criar a rota para login: POST (/login)
-Criar a rota para de novos usuários: POST (/usuario).
-Garantir a validação adequada dos dados. */
-
 const User = require("../models/User")
 const { compareSync } = require('bcryptjs')
 const { sign } = require('jsonwebtoken')

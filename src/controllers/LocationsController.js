@@ -47,7 +47,6 @@ class LocationsController {
     }
 
     // Rota para listar todos os locais de treino do usuário
-
     async listAll(request, response) {
         try {
             const user_id = request.userId; 
@@ -70,7 +69,6 @@ class LocationsController {
     }
 
     // Rota para listar um local de treino do usuário
-
     async listOne(request, response) {
         try {
             const { local_id } = request.params;
@@ -99,7 +97,6 @@ class LocationsController {
     }
 
     // Rota para deletar um local de treino do usuário
-
     async delete(request, response) {
         try {
             const { local_id } = request.params;
@@ -122,7 +119,6 @@ class LocationsController {
     }
 
     // Rota para atualizar um local de treino do usuário
-
     async update(request, response) {
         try {
             const { local_id } = request.params;
@@ -161,7 +157,7 @@ class LocationsController {
             location.description = data.description || location.description;
             location.cep = data.cep || location.cep;
 
-            await location.save();
+            await location.save(); // Certifique-se de chamar save() após atualizar os campos
 
             return response.status(200).json(location);
         } catch (error) {
@@ -171,7 +167,6 @@ class LocationsController {
     }
 
     // Função para resgatar link do google maps, disponibilizando a localização de um local de treino específico
-
     async map(request, response) {
         try {
             const user_id = request.userId; // Obtém o ID do usuário pelo JWT

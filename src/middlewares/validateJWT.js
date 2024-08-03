@@ -12,9 +12,11 @@ function validateJWT(request, response, next) {
 
         const jwt = token.split(" ")
     
-        const resultado = verify(jwt[1], process.env.JWT_SECRET)
+        // Verifica o token JWT
+        const result = verify(jwt[1], process.env.JWT_SECRET)
         
-        request.userId = resultado.id
+         // Adiciona o ID do usuário na requisição
+        request.userId = result.id
 
         next()
     } catch (error) {
