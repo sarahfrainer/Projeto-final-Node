@@ -1,5 +1,6 @@
 const swaggerAutogen = require('swagger-autogen')();
 
+// Configuração inicial do Swagger, que documentará as rotas
 const doc = {
     info: {
         title: 'API +Hoje',

@@ -6,6 +6,7 @@ const APP_PORT = process.env.APP_PORT
 
 class Server {
     
+    // Inicialização do sistema
     constructor(server = express()) {
         this.middlewares(server)
         this.database()
@@ -13,6 +14,7 @@ class Server {
         this.initializeServer(server)
     }
 
+    // Rodar middlewares
     async middlewares(server) {
         console.log("Executando os middlewares")
         server.use(cors()) // Quando tiver em Produção Habilita os Cors
@@ -20,6 +22,7 @@ class Server {
         console.log("Middlewares executados")
     }
 
+    // Conectando ao banco de dados
     async database() {
         try {
             console.log("Conectando ao banco de dados")
@@ -29,6 +32,7 @@ class Server {
         }
     }
 
+    // Roda o servidor de forma local, segundo informações preenchidas no arquivo .env
     async initializeServer(server) {
         server.listen(APP_PORT, () => {
             console.log(`Servidor rodando na porta ${APP_PORT}!`)

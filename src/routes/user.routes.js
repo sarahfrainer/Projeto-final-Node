@@ -44,6 +44,3 @@ swagger.tags = ['Users']
 );
 
 module.exports = usersRoutes
-
-
-// get: path ou query - 

@@ -1,6 +1,7 @@
 const { config } = require('dotenv')
 config()
 
+// Processa dados do arquivo .env
 module.exports = {
     dialect: process.env.DB_DIALECT,
     host: process.env.DB_HOST,

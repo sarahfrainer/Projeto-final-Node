@@ -10,7 +10,10 @@ const emailPattern = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
 const cpfPattern = new RegExp(/^\d{3}\.\d{3}\.\d{3}-\d{2}$|^\d{11}$/);
 const allowedGenders = ['Masculino', 'Feminino', 'Outro'];
 
+// Criação de função para verificar se a data de nascimento do usuário é válida
+
 function isValidDate(dateString) {
+    // Verificando se o padrão da data é válido, a partir do modelo usado na programação (ano, mês, dia)
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
     if (!datePattern.test(dateString)) {
         return false;
@@ -24,12 +27,14 @@ function isValidDate(dateString) {
     }
 
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Zerar horas, minutos, segundos e milissegundos para comparação de datas
+    today.setHours(0, 0, 0, 0);
 
+    // Verificando se a data não é posterior ao dia de hoje
     if (date > today) {
         return false;
     }
 
+    // Configura a data para o banco de dados outra vez
     return dateString === date.toISOString().split('T')[0];
 }
 
@@ -67,7 +72,7 @@ class UserController {
                     })
             }
 
-            // editar essa parte na hora do JWT
+            // Configurando o token de login e validação
             const token = sign({
                 id: user.id
             },
@@ -158,12 +163,7 @@ class UserController {
                     .json({ mensagem: 'Por favor, insira um e-mail válido' })
             }
 
-            if (!(data.password?.length >= 6 && data.password?.length <= 18)) {
-                return response
-                    .status(400)
-                    .json({ mensagem: 'A senha deve ter entre 6 e 18 dígitos' })
-            }
-
+          
             const emailExist = await User.findOne({
                 where: {
                     email: data.email
@@ -175,6 +175,13 @@ class UserController {
                     .status(409)
                     .json({ mensagem: 'Uma conta já foi criada nesse e-mail' })
             }
+
+            if (!(data.password?.length >= 6 && data.password?.length <= 18)) {
+                return response
+                    .status(400)
+                    .json({ mensagem: 'A senha deve ter entre 6 e 18 dígitos' })
+            }
+
 
            
 

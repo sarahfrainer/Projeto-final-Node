@@ -44,12 +44,15 @@ const User = connection.define('users', {
     paranoid: true
 });
 
+// Estabelece relação entre as tabelas
 
 Usuario.hasMany(TrainingLocations, {
     foreignKey: 'usuarioId',
-    onDelete: 'RESTRICT' // Barra a exclusão
+    onDelete: 'RESTRICT' // Impede a exclusão do usuário que tiver um local de treino ou mais cadastrados
 });
 
+
+// Para codificar a senha como uma segurança adicional
 
 User.beforeSave((user) => {
     user.password = hashSync(user.password, 10)

@@ -36,6 +36,7 @@ const TrainingLocations = connection.define('training_locations', {
     paranoid: true // Habilita soft delete
 });
 
+// Estabelece relação entre as tabelas
 
 TrainingLocations.belongsTo(Usuario, {
     foreignKey: 'usuarioId'
