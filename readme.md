@@ -12,7 +12,9 @@
 
 - [Banco de dados](#banco-de-dados)
 
-- [Tabelas](#tabelas-de-dados)
+- [Tabelas](#tabelas-de-dados-já-criadas)
+
+- [Seeders](#seeders)
 
 - [JWT como Middleware](#utilizando-o-JWT-como-Middleware)
 
@@ -26,7 +28,7 @@
 
 +Hoje é um projeto backend desenvolvido para um site de gerenciamento de exercícios e de locais para práticas esportivas. O nome foi inspiração na ideia de criar "mais hojes" (ou seja, mais longevidade) a partir do cuidado com a saúde. Assim, o objetivo do sistema é incentivar a prática de atividade física e o fim do sedentarismo.
 
-O sistema conta com sistema de autenticação e rotas privadas, sendo que este último apenas não inclui a página de login do usuário. Ao logar no sistema, os usuários poderão cadastrar novos locais de exercícios, encontrar pontos próximos, visualizar informações sobre os os exercícios em cada ponto e registrar suas próprias contribuições para o sistema. O sistema já carrega informações prévias, mas o detalhe é que os cadastros de cada usuário são privado. Assim, apenas o usuário que cadastrou um local pode consultá-lo depois, por exemplo.
+O sistema conta com sistema de autenticação e rotas privadas, sendo que este último apenas não inclui a página de login do usuário. Ao logar no sistema, os usuários poderão cadastrar novos locais de exercícios, encontrar pontos próximos, visualizar informações sobre os os exercícios em cada ponto e registrar suas próprias contribuições para o sistema. O sistema já carrega informações de usuários prévias. O detalhe é que os cadastros de locais de treino são privados. Assim, apenas o usuário que cadastrou um local pode consultá-lo depois, por exemplo.
 
 
 ## Funcionalidades
@@ -35,11 +37,13 @@ O sistema conta com sistema de autenticação e rotas privadas, sendo que este �
 
 &#10003; `Funcionalidade 2:` Locais de Treino (cadastro, visualização, entre outros).
 
-&#10003; `Funcionalidade 3:` Mecanismo de Autenticação (JWT).
+&#10003; `Funcionalidade 3:` Resgaste de link do Google Maps com localização do local de treino.
 
-&#10003; `Funcionalidade 4:` Validação via Middleware.
+&#10003; `Funcionalidade 4:` Mecanismo de Autenticação (JWT).
 
-&#10003; `Funcionalidade 5:` Informações críticas do ambiente armazenadas em variáveis (env).
+&#10003; `Funcionalidade 5:` Validação via Middleware.
+
+&#10003; `Funcionalidade 6:` Informações críticas do ambiente armazenadas em variáveis (env).
 
 
 ## Ferramentas utilizadas
@@ -72,12 +76,12 @@ Configurar com as suas informações críticas de ambiente
 
 ```
 cd src
-node index.js
+node .
 ```
 
 ## Banco de dados
 
-Interface utilizada: PgAdmin.
+Interface utilizada pela desenvolvedora: PgAdmin.
 
 Passo a passo:
 1. Criar Repositório DataBase chamado "+Hoje".
@@ -94,7 +98,7 @@ Passo a passo:
 | name      | STRING     | Não nulo                  |
 | gender    | ENUM       | Não nulo                  |
 | cpf       | STRING     | Não nulo, Único           |
-| address   | STRING     | Não nulo                  |
+| adress   | STRING     | Não nulo                  |
 | birthdate | DATE       | Não nulo                  |
 | email     | STRING     | Não nulo, Único           |
 | password  | STRING     | Não nulo                  |
@@ -109,7 +113,7 @@ Passo a passo:
 | description    | TEXT              | Não nulo                                          |
 | locality       | STRING            | Não nulo                                          |
 | cep            | STRING            | Não nulo                                          |
-| userId         | INTEGER           | Não nulo, Referência à tabela de usuários         |
+| user_id         | INTEGER           | Não nulo, Referência à tabela de usuários         |
 
 
 ### Relacionamentos
@@ -150,8 +154,8 @@ No projeto, foi utilizado o JWT como Middleware para uma segurança extra. Dessa
 
 Melhorias que poderiam ter sido aplicadas ao projeto:
 
-1. 
-2. 
+1. Melhorar tratamento na data de nascimento no cadastro do usuário.
+2. Criação de um interface front-end para visualização dos processos.
 3. 
 4. 
 5. 
