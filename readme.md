@@ -156,10 +156,6 @@ Melhorias que poderiam ter sido aplicadas ao projeto:
 
 1. Melhorar tratamento na data de nascimento no cadastro do usuário.
 2. Criação de um interface front-end para visualização dos processos.
-3. 
-4. 
-5. 
-6. 
 
 
 ## Desenvolvimento
