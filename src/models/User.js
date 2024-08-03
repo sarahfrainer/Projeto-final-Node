@@ -1,9 +1,10 @@
-const { DataTypes } = require('sequelize');
-const connection = require('../database/connection');
-const User = require('./User');
+const { DataTypes } = require("sequelize");
+const connection = require("../database/connection");
+const {hashSync} = require('bcryptjs');
+const TrainingLocations = require("./TrainingLocations");
 
-const TrainingLocations = connection.define('training_locations', {
-    id: {
+const User = connection.define('users', {
+    id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -12,33 +13,47 @@ const TrainingLocations = connection.define('training_locations', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    description: {
-        type: DataTypes.TEXT,
+    gender: {
+        type: DataTypes.ENUM('Masculino', 'Feminino', 'Outro'),
         allowNull: false
     },
-    locality: {
+    cpf: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    cep: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    user_id: {
-        type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: User, 
-            key: 'id'
-        }
+        unique: true
+    },
+    adress: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    birthdate: {
+        type: DataTypes.DATEONLY,
+        allowNull: false
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
-}, {
-    paranoid: true 
+},
+{
+    paranoid: true
 });
 
 
-TrainingLocations.belongsTo(User, {
-    foreignKey: 'user_id' 
+Usuario.hasMany(TrainingLocations, {
+    foreignKey: 'usuarioId',
+    onDelete: 'RESTRICT' // Barra a exclusão
 });
 
-module.exports = TrainingLocations;
+
+User.beforeSave((user) => {
+    user.password = hashSync(user.password, 10)
+    return user
+})
+
+module.exports = User

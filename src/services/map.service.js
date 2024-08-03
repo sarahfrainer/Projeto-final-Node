@@ -17,9 +17,9 @@ async function getMapCep(cep) {
     }
 }
 
-async function getGoogleMaps(coordenates) {
+async function getGoogleMaps(coordinates) {
     try {
-        const { latitude, longitude } = coordenates;
+        const { latitude, longitude } = coordinates;
 
         const googleMapsLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
@@ -30,12 +30,12 @@ async function getGoogleMaps(coordenates) {
     }
 }
 
-async function MainLink (cep) {
+async function MainLink(cep) {
     try {
         const location = await getMapCep(cep);
 
-        if (locationData.erro) {
-            throw new Error("Erro ao processar o cep");
+        if (location.erro) {
+            throw new Error('Erro ao processar o CEP');
         }
 
         const link = await getGoogleMaps(location);

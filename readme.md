@@ -84,7 +84,7 @@ Passo a passo:
 2. Rodar migrations com o comando: npx sequelize db:migrate.
 
 
-## Tabelas de dados
+## Tabelas de dados já criadas
 
 ### Tabela de Usuários
 
@@ -118,6 +118,23 @@ Passo a passo:
 - Um local de treino pertence a um único usuário.
 
 
+## Seeders
+
+Para carregar dados iniciais de três usuários no sistema, foi criado um arquivo seeders. Para rodar o arquivo, é necessário usar o comando:
+
+```
+ npx sequelize-cli db:seed:all
+ ```
+
+ Já para criar novos arquivos seeders, é necessário executar esse comando:
+
+ ```
+npx sequelize-cli seed:generate --name nome-do-arquivo
+ ```
+
+ Em seguida, preencha esse arquivo com as novas informações iniciais do sistema e rode o primeiro comando mais uma vez para enviar para o banco de dados.
+
+
 ## Utilizando o JWT como Middleware
 
 No projeto, foi utilizado o JWT como Middleware para uma segurança extra. Dessa forma, nas rotas privadas (rotas que envolvem os locais), é preciso utilizar o token para fazer as requisições. No Postman, o passo a passo para isso é:
@@ -126,6 +143,7 @@ No projeto, foi utilizado o JWT como Middleware para uma segurança extra. Dessa
 1. Realize o cadastro de um usuário utilizando a rota criada para este fim (Modo POST + endpoint "/users/register" + informações requisitadas no body);
 2. Realize login com esse usuário. Como resposta, aparecerá o token. Copie-o.
 3. Selecione a rota de local desejada. No header da requisição, selecione "bearer token" e cole o código JWT. Finalize a requisição com os outros procedimentos que forem necessários (por exemplo, preenchendo o body no caso do cadastro de um local).
+
 
 
 ## Melhorias possíveis

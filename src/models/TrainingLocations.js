@@ -20,11 +20,6 @@ const TrainingLocations = connection.define('training_locations', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    coordinates: {
-        type: DataTypes.ARRAY(DataTypes.FLOAT),
-        allowNull: false,
-        unique: true
-    },
     cep: {
         type: DataTypes.STRING,
         allowNull: false

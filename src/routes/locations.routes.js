@@ -162,4 +162,4 @@ locationsRoutes.put('/:id', LocationsController.update
 )
 
 
-module.exports = usersRoutes
+module.exports = locationsRoutes
