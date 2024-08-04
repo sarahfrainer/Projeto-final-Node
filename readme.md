@@ -149,6 +149,10 @@ No projeto, foi utilizado o JWT como Middleware para uma segurança extra. Dessa
 3. Selecione a rota de local desejada. No "Authorization" da requisição, selecione "bearer token" e cole o código JWT. Finalize a requisição com os outros procedimentos que forem necessários (por exemplo, preenchendo o body no caso do cadastro de um local).
 
 
+## Swagger
+
+Foi implementada uma documentação da API utilizando o Swagger. Assim, ao rodar o sistema e acessar "http://localhost:3000/docs/", o programador tem acesso a todas as rotas possíveis e respostas esperadas.
+
 
 ## Melhorias possíveis
 
