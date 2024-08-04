@@ -66,6 +66,7 @@ locationsRoutes.post('/', LocationsController.create
     */
 );
 
+
 locationsRoutes.get('/', LocationsController.listAll
     /*
     swagger.tags = ['TrainingLocations']

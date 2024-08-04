@@ -75,7 +75,6 @@ Configurar com as suas informações críticas de ambiente
 ```
 
 ```
-cd src
 node .
 ```
 
